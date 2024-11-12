@@ -3,7 +3,7 @@ import './Button.css';
 function Button(props) {
  
   return (
-    <button className="calculator-button" data-label={props.label}><span>{props.label}</span></button>
+    <button onClick={props.handleClick} className="calculator-button" data-label={props.label}><span>{props.label}</span></button>
   );
 }
 
