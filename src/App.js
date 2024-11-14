@@ -73,22 +73,6 @@ function App() {
   // Handle button clicks here
   function handleClick(rawValue) {
     const value = evalable(rawValue);
-    if (value === "=") {
-      // if = then eval calcBuffer
-      // NOTE: eval can be dangerous but isn't in this use case
-      setCalcBuffer(String(eval(calcBuffer)));
-      return;
-    }
-    if (value === "AC") {
-      // if AC all clear
-      setCalcBuffer("0");
-      return;
-    }
-    if (value === "." && isDigit(getLastChar(calcBuffer))) {
-      // if value is . and last entry is a digit, add . to buffer
-      setCalcBuffer(calcBuffer + value);
-      return;
-    }
     if (
       value === "+/-" &&
       isDigit(getLastChar(calcBuffer)) &&
@@ -111,6 +95,23 @@ function App() {
         );
         setLastNegatedNumber(`(-${getLastFloat(calcBuffer)})`);
       }
+      return;
+    }
+    setLastNegatedNumber("");
+    if (value === "=") {
+      // if = then eval calcBuffer
+      // NOTE: eval can be dangerous but isn't in this use case
+      setCalcBuffer(String(eval(calcBuffer)));
+      return;
+    }
+    if (value === "AC") {
+      // if AC all clear
+      setCalcBuffer("0");
+      return;
+    }
+    if (value === "." && isDigit(getLastChar(calcBuffer))) {
+      // if value is . and last entry is a digit, add . to buffer
+      setCalcBuffer(calcBuffer + value);
       return;
     }
     if (isDigit(value) && calcBuffer === "0") {
